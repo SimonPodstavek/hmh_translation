@@ -1,28 +1,35 @@
-import openai
+import os
+from os.path import join, abspath
+
 import tiktoken
 import requests
-import os
+import openai.embeddings_utils
+import openai
 import pandas as pd
 import numpy as np
+import re
 
-
-
-# df = pd.read_csv('output/embedded_1k_reviews.csv')
-# df['ada_embedding'] = df.ada_embedding.apply(eval).apply(np.array)
-
+cwd = os.getcwd()
+paragraph_embeddings_df = pd.read_csv((join(cwd, 'src\source\paragraph_embeddings.csv')), encoding='ansi')
 
 # def get_embedding(text, model="text-embedding-ada-002"):
 #    text = text.replace("\n", " ")
 #    return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
 
-# df['ada_embedding'] = df.combined.apply(lambda x: get_embedding(x, model='text-embedding-ada-002'))
-# df.to_csv('output/embedded_1k_reviews.csv', index=False)
 
 
+def get_translated_paragraph() -> str:
+    print("Zadaje obsah prekladu. Pre uloženie stlačte Ctrl-Z.")
+    contents = []
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            break
+        contents.append(line)
 
-
-
-
+    contents = ''.join(contents)
+    contents = contents.replace('\xa0', '')
 
 
 
@@ -89,3 +96,11 @@ print(response.text)
 # print(num_tokens_from_string(input_string, "cl100k_base"))
 
 
+def mediator() -> None:
+
+
+
+
+
+if __name__ == '__main__':
+    mediator()    
